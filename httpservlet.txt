@@ -1,0 +1,102 @@
+***************************httpaddition .java*****************
+
+package com.http;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+
+public class httpaddition extends HttpServlet
+{
+	public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException
+	{
+		
+		res.setContentType("text/html");
+		
+		PrintWriter out=res.getWriter();
+		
+		String str1=req.getParameter("n1");
+		String str2=req.getParameter("n2");
+		
+		int num1=Integer.parseInt(str1);
+		int num2=Integer.parseInt(str2);
+		
+		int result=num1+num2;
+		
+		out.print("<h1>"+num1+" + "+num2+" = "+result+"</h1>");
+		
+		
+	}
+
+}
+
+
+
+
+****************web.xml*******************
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>httpDemo</display-name>
+  
+  <!-- servlet setting -->
+  
+  <servlet>
+  		<servlet-name>httpadd</servlet-name>
+  		<servlet-class>com.http.httpaddition</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  		<servlet-name>httpadd</servlet-name>
+  		<url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+
+
+*******************index.html****************
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="add" method="post">
+	<table>
+		<tr>
+			<td>Enter Number</td>
+			<td> <input type="text" name="n1"> </td>
+		</tr>
+		<tr>
+			<td>Enter Number</td>
+			<td> <input type="text" name="n2" placeholder="Enter here"> </td>
+		</tr>
+		
+		<tr>
+			<td>
+				<button type="add" name="submit">add</button>
+			</td>
+		
+		</tr>
+		
+	</table>
+</form>
+
+
+
+</body>
+</html>
